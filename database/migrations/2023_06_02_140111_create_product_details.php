@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('product_details', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('product_id')->unsigned();
-            $table->string('color');
-            $table->string('size');
-            $table->integer('qty');
+            $table->unsignedBigInteger('product_id')->unsigned();
+            $table->string('color')->nullable();
+            $table->string('size')->nullable();
+            $table->integer('qty')->nullable();
 
             $table->timestamps();
         });
