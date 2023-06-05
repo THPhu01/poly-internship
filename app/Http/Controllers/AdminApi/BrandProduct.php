@@ -4,23 +4,22 @@ namespace App\Http\Controllers\AdminApi;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ProductCategory;
+use App\Models\ProductBrand;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Resources\CategoryProduct as CategoryProductApi;
+use App\Http\Resources\BrandProduct as BrandProductApi;
 
-
-class CategoryProduct extends Controller
+class BrandProduct extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $cate = ProductCategory::all();
+        $brand = ProductBrand::all();
         $arr = [
             'status' => true,
-            'message' => "Danh sách danh mục sản phẩm",
-            'data' => CategoryProductApi::collection($cate)
+            'message' => "Danh sách thương hiệu sản phẩm",
+            'data' => BrandProductApi::collection($brand)
         ];
         return response()->json($arr, 200);
     }
@@ -51,13 +50,13 @@ class CategoryProduct extends Controller
             ];
             return response()->json($arr, 200);
         }
-        $cate = ProductCategory::create([
+        $brand = ProductBrand::create([
             'name' => $request->name
         ]);
         $arr = [
             'status' => true,
-            'message' => "Danh mục sản phẩm đã thêm thành công",
-            'data' => new CategoryProductApi($cate)
+            'message' => "Thương hiệu sản phẩm đã thêm thành công",
+            'data' => new BrandProductApi($brand)
         ];
         return response()->json($arr, 201);
     }
@@ -67,19 +66,19 @@ class CategoryProduct extends Controller
      */
     public function show(string $id)
     {
-        $cate = ProductCategory::find($id);
-        if (is_null($cate)) {
+        $brand = ProductBrand::find($id);
+        if (is_null($brand)) {
             $arr = [
                 'success' => false,
-                'message' => 'Không có danh mục này',
+                'message' => 'Không có thương hiệu này',
                 'dara' => []
             ];
             return response()->json($arr, 200);
         }
         $arr = [
             'status' => true,
-            'message' => "Chi tiết danh mục ",
-            'data' => new CategoryProductApi($cate)
+            'message' => "Chi tiết thương hiệu",
+            'data' => new BrandProductApi($brand)
         ];
         return response()->json($arr, 201);
     }
@@ -95,7 +94,7 @@ class CategoryProduct extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
@@ -110,13 +109,13 @@ class CategoryProduct extends Controller
             ];
             return response()->json($arr, 200);
         }
-        $cate = ProductCategory::find($id);
-        $cate->name = $request->name;
-        $cate->save();
+        $brand = ProductBrand::find($id);
+        $brand->name = $request->name;
+        $brand->save();
         $arr = [
             'status' => true,
-            'message' => 'Danh mục cập nhật thành công',
-            'data' => new CategoryProductApi($cate)
+            'message' => 'Thương hiệu cập nhật thành công',
+            'data' => new BrandProductApi($brand)
         ];
         return response()->json($arr, 200);
     }
@@ -124,13 +123,13 @@ class CategoryProduct extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        $cate = ProductCategory::find($id);
-        $cate->delete();
+        $brand = ProductBrand::find($id);
+        $brand->delete();
         $arr = [
             'status' => true,
-            'message' => 'Danh mục sản phẩm đã được xóa',
+            'message' => 'Thương hiệu sản phẩm đã được xóa',
             'data' => [],
         ];
         return response()->json($arr, 200);
