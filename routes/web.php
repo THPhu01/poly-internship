@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\UsersAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +16,3 @@ use App\Http\Controllers\Admin\UsersAdmin;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resources([
-    'users' => UsersAdmin::class,
-]);
