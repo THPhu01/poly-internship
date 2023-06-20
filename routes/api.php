@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminApi\UsersController;
 use App\Http\Controllers\AdminApi\CategoryProduct;
 use App\Http\Controllers\AdminApi\BrandProduct;
+use App\Http\Controllers\AdminApi\OrderDetail;
 use App\Http\Controllers\AdminApi\ProductController;
 use App\Http\Controllers\AdminApi\ProductCheckout;
 /*
@@ -28,4 +29,5 @@ Route::resources([
     'brand-product' => BrandProduct::class,
     'product' => ProductController::class,
     'order' => ProductCheckout::class,
+    'order-detail' => OrderDetail::class,
 ]);

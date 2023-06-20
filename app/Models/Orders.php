@@ -12,7 +12,7 @@ class Orders extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'user_id',
-        'full_name',
+        'name',
         'email',
         'address',
         'phone',
